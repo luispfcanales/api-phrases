@@ -22,6 +22,9 @@ func New(servicePhrase ports.SRVPhrase) *phraseHDL {
 
 // Setup set handlers to managment http
 func (hdl *phraseHDL) Setup(mux *http.ServeMux) {
+	mux.HandleFunc("/", middleware.Cors(func(w http.ResponseWriter, r *http.Request) {
+		w.Write([]byte("hola"))
+	}))
 	mux.HandleFunc("/phrase", middleware.Cors(hdl.Phrase))
 }
 
